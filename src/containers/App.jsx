@@ -20,7 +20,10 @@ const App = () => {
       {initialState.mylist.lenght > 0 && (
         <Categories title='Mi Lista'>
           <Carousel>
-            <CarouselItem />
+            {initialState.mylist.map((item) => (
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              <CarouselItem key={item.id} {...item} />
+            ))}
           </Carousel>
         </Categories>
       )}
