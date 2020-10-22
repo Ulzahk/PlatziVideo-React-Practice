@@ -3,12 +3,12 @@ import '../assets/styles/components/CarouselItem.scss';
 import playButton from '../assets/static/icons8-play-64.png';
 import plusButton from '../assets/static/icons8-plus-64.png';
 
-const CarouselItem = () => (
+const CarouselItem = ({ cover, title, year, contentRating, duration }) => (
   <div className='carousel-item'>
     <img
       className='carousel-item__img'
-      src='https://images.pexels.com/photos/2477357/pexels-photo-2477357.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-      alt='Banda de musica'
+      src={cover}
+      alt={title}
     />
     <div className='carousel-item__details'>
       <div>
@@ -23,8 +23,10 @@ const CarouselItem = () => (
           alt='Botón de Agregar'
         />
       </div>
-      <p className='carousel-item__details--title'>Título descriptivo</p>
-      <p className='carousel-item__details--subtitle'>2020 16+ 114 minutos</p>
+      <p className='carousel-item__details--title'>{title}</p>
+      <p className='carousel-item__details--subtitle'>
+        {`${year}, ${contentRating} ${duration}`}
+      </p>
     </div>
   </div>
 );

@@ -9,41 +9,35 @@ import '../assets/styles/App.scss';
 import '../assets/styles/Media.scss';
 
 const App = () => {
-  const [videos, setVideos] = useState([]);
-  useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/initialState");
-        const data = await response.json();
-        return setVideos(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchVideos();
-  }, []);
+  const [videos, setVideos] = useState({
+    mylist: [],
+    trends: [],
+    originals: [],
+  });
 
-  console.log(videos);
+  useEffect(() => {
+    fetch('http://localhost:3000/initialState')
+      .then((response) => response.json())
+      .then((data) => setVideos(data));
+  }, []);
   return (
     <div className='App'>
       <Header />
       <Search />
-
-      <Categories title='Mi Lista'>
-        <Carousel>
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-        </Carousel>
-      </Categories>
+      {videos.mylist.lenght > 0 && (
+        <Categories title='Mi Lista'>
+          <Carousel>
+            <CarouselItem />
+          </Carousel>
+        </Categories>
+      )}
 
       <Categories title='Tendencias'>
         <Carousel>
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
+          {videos.trends.map((item) => (
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            <CarouselItem key={item.id} {...item} />
+          ))}
         </Carousel>
       </Categories>
 
