@@ -10,11 +10,17 @@ import '../assets/styles/Media.scss';
 
 const App = () => {
   const [videos, setVideos] = useState([]);
-
   useEffect(() => {
-    fetch('http://localhost:3000/initalState')
-      .then(response => response.json())
-      .then(data => setVideos(data));
+    const fetchVideos = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/initialState");
+        const data = await response.json();
+        return setVideos(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchVideos();
   }, []);
 
   console.log(videos);
