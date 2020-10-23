@@ -1,23 +1,27 @@
-import React from 'react';
-import Header from '../components/Header';
-import Search from '../components/Search';
-import Categories from '../components/Categories';
-import Carousel from '../components/Carousel';
-import CarouselItem from '../components/CarouselItem';
-import Footer from '../components/Footer';
-import '../assets/styles/App.scss';
-import '../assets/styles/Media.scss';
-import useInitialState from '../hooks/useInitialState';
+import React from "react";
+import Header from "../components/Header";
+import Search from "../components/Search";
+import Categories from "../components/Categories";
+import Carousel from "../components/Carousel";
+import CarouselItem from "../components/CarouselItem";
+import Footer from "../components/Footer";
+import "../assets/styles/App.scss";
+import "../assets/styles/Media.scss";
+import useInitialState from "../hooks/useInitialState";
 
-const API = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.KEY}&language=en-US&page=1`;
+const Endpoint1 = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.KEY}&language=es-MX&page=1`;
+const Endpoint2 = `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.KEY}&language=es-MX&page=1`;
+const Endpoint3 = `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.KEY}&language=es-MX&page=1`;
 const App = () => {
-  const initialState = useInitialState(API);
+  const initialState = useInitialState(Endpoint1);
+  const initialState2 = useInitialState(Endpoint2);
+  const initialState3 = useInitialState(Endpoint3);
   return (
-    <div className='App'>
+    <div className="App">
       <Header />
       <Search />
       {initialState.total_pages > 0 && (
-        <Categories title='Mi Lista'>
+        <Categories title="Mi Lista">
           <Carousel>
             {initialState.results.slice(16, 19).map((item) => (
               // eslint-disable-next-line react/jsx-props-no-spreading
@@ -26,19 +30,27 @@ const App = () => {
           </Carousel>
         </Categories>
       )}
-
-      <Categories title='Tendencias'>
+      <Categories title="Populares">
         <Carousel>
-          {initialState.results.slice(8, 15).map((item) => (
+          {initialState.results.map((item) => (
             // eslint-disable-next-line react/jsx-props-no-spreading
             <CarouselItem key={item.id} {...item} />
           ))}
         </Carousel>
       </Categories>
 
-      <Categories title='Originales de Platzi Video'>
+      <Categories title="Mejores Calificaciones">
         <Carousel>
-          {initialState.results.slice(0, 7).map((item) => (
+          {initialState2.results.map((item) => (
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            <CarouselItem key={item.id} {...item} />
+          ))}
+        </Carousel>
+      </Categories>
+
+      <Categories title="Estrenos">
+        <Carousel>
+          {initialState3.results.map((item) => (
             // eslint-disable-next-line react/jsx-props-no-spreading
             <CarouselItem key={item.id} {...item} />
           ))}
