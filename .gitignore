@@ -52,6 +52,7 @@ logs
 **/*.backup.*
 **/*.back.*
 dist
+.env
 
 node_modules
 bower_components
