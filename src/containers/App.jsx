@@ -9,18 +9,17 @@ import '../assets/styles/App.scss';
 import '../assets/styles/Media.scss';
 import useInitialState from '../hooks/useInitialState';
 
-const API = 'http://localhost:3000/initialState';
+const API = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.KEY}&language=en-US&page=1`;
 const App = () => {
   const initialState = useInitialState(API);
-  console.log(initialState);
   return (
     <div className='App'>
       <Header />
       <Search />
-      {initialState.mylist.lenght > 0 && (
+      {initialState.total_pages > 0 && (
         <Categories title='Mi Lista'>
           <Carousel>
-            {initialState.mylist.map((item) => (
+            {initialState.results.slice(16, 19).map((item) => (
               // eslint-disable-next-line react/jsx-props-no-spreading
               <CarouselItem key={item.id} {...item} />
             ))}
@@ -30,7 +29,7 @@ const App = () => {
 
       <Categories title='Tendencias'>
         <Carousel>
-          {initialState.trends.map((item) => (
+          {initialState.results.slice(8, 15).map((item) => (
             // eslint-disable-next-line react/jsx-props-no-spreading
             <CarouselItem key={item.id} {...item} />
           ))}
@@ -39,7 +38,7 @@ const App = () => {
 
       <Categories title='Originales de Platzi Video'>
         <Carousel>
-          {initialState.originals.map((item) => (
+          {initialState.results.slice(0, 7).map((item) => (
             // eslint-disable-next-line react/jsx-props-no-spreading
             <CarouselItem key={item.id} {...item} />
           ))}
