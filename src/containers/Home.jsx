@@ -12,7 +12,7 @@ import useInitialState from '../hooks/useInitialState';
 const Endpoint1 = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.KEY}&language=es-MX&page=1`;
 const Endpoint2 = `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.KEY}&language=es-MX&page=1`;
 const Endpoint3 = `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.KEY}&language=es-MX&page=1`;
-const App = () => {
+const Home = () => {
   const initialState = useInitialState(Endpoint1);
   const initialState2 = useInitialState(Endpoint2);
   const initialState3 = useInitialState(Endpoint3);
@@ -62,4 +62,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;
