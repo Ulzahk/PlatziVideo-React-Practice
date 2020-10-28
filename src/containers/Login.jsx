@@ -23,7 +23,7 @@ const Login = () => (
                 <div><img src={googleIcon} alt="Icono Google" />Iniciar Sesión con Google</div>
                 <div><img src={twitterIcon} alt="Icono Twitter"/>Iniciar Sesión con Twitter</div>
             </section>
-            <p className="login__container--register">No tienes ninguna cuenta <a href="/">Registrate</a></p>
+            <p className="login__container--register">No tienes ninguna cuenta <a href="/sign-up">Registrate</a></p>
         </section>
     </section>
 );

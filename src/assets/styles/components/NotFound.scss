@@ -1,0 +1,21 @@
+.error404 {
+  width: 100%;
+  min-height: 71.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+}
+.error404--title {
+  font-size: 64px;
+}
+.error404--subtitle {
+  font-size: 20px;
+}
+
+.animated {
+  animation-duration: 2.5s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
