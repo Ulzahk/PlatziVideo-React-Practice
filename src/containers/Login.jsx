@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import googleIcon from '../assets/static/icons8-google-plus-50.png'
 import twitterIcon from '../assets/static/icons8-twitter-50.png'
 import '../assets/styles/components/Login.scss'
@@ -23,7 +24,7 @@ const Login = () => (
                 <div><img src={googleIcon} alt="Icono Google" />Iniciar Sesión con Google</div>
                 <div><img src={twitterIcon} alt="Icono Twitter"/>Iniciar Sesión con Twitter</div>
             </section>
-            <p className="login__container--register">No tienes ninguna cuenta <a href="/sign-up">Registrate</a></p>
+            <p className="login__container--register">No tienes ninguna cuenta <Link to='/sign-up'>Registrate</Link></p>
         </section>
     </section>
 );

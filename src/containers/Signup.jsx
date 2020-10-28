@@ -1,5 +1,6 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../assets/styles/components/Signup.scss';
 
 const Signup = () => (
@@ -13,7 +14,7 @@ const Signup = () => (
         <button className='button'>Registrarme</button>
       </form>
       <p className='signup__container--register'>
-        <a href='/login'>Iniciar Sesión</a>
+        <Link to='/login'>Iniciar Sesión</Link>
       </p>
     </section>
   </section>
