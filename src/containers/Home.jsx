@@ -1,60 +1,56 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
 import '../assets/styles/App.scss';
 import '../assets/styles/Media.scss';
-import useInitialState from '../hooks/useInitialState';
 
-const Endpoint1 = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.KEY}&language=es-MX&page=1`;
-const Endpoint2 = `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.KEY}&language=es-MX&page=1`;
-const Endpoint3 = `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.KEY}&language=es-MX&page=1`;
-const Home = () => {
-  const initialState = useInitialState(Endpoint1);
-  const initialState2 = useInitialState(Endpoint2);
-  const initialState3 = useInitialState(Endpoint3);
+const Home = ({ myList, trends, originals }) => {
   return (
     <>
       <Search />
-      {initialState.total_pages > 0 && (
+      {myList.length > 0 && (
         <Categories title='Mi Lista'>
           <Carousel>
-            {initialState.results.slice(16, 19).map((item) => (
+            {myList.map((item) => (
               // eslint-disable-next-line react/jsx-props-no-spreading
               <CarouselItem key={item.id} {...item} />
             ))}
           </Carousel>
         </Categories>
       )}
-      <Categories title='Populares'>
+
+      <Categories title='Tendencias'>
         <Carousel>
-          {initialState.results.map((item) => (
+          {trends.map((item) => (
             // eslint-disable-next-line react/jsx-props-no-spreading
             <CarouselItem key={item.id} {...item} />
           ))}
         </Carousel>
       </Categories>
 
-      <Categories title='Mejores Calificaciones'>
+      <Categories title='Originales'>
         <Carousel>
-          {initialState2.results.map((item) => (
+          {originals.map((item) => (
             // eslint-disable-next-line react/jsx-props-no-spreading
             <CarouselItem key={item.id} {...item} />
           ))}
         </Carousel>
       </Categories>
 
-      <Categories title='Estrenos'>
-        <Carousel>
-          {initialState3.results.map((item) => (
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            <CarouselItem key={item.id} {...item} />
-          ))}
-        </Carousel>
-      </Categories>
     </>
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    myList: state.myList,
+    trends: state.trends,
+    originals: state.originals,
+  };
+};
+
+export default connect(mapStateToProps, null)(Home);
+
