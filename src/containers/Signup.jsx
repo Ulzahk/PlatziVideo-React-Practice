@@ -18,6 +18,7 @@ const Signup = (props) => {
     });
   };
   const handleSubmit = () => {
+    // eslint-disable-next-line no-restricted-globals
     event.preventDefault();
     props.signupRequest(form);
     props.history.push('/');
@@ -60,5 +61,5 @@ const Signup = (props) => {
 
 const mapDispatchToProps = {
   signupRequest,
-}
+};
 export default connect(null, mapDispatchToProps)(Signup);
